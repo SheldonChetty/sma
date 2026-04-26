@@ -1,3 +1,4 @@
+# pip install pandas emoji
 import pandas as pd
 import re
 import emoji
