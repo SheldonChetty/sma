@@ -1,8 +1,15 @@
-# pip install pandas emoji
+#pip install pandas emoji nltk
 import pandas as pd
 import re
 import emoji
 import string
+import nltk
+from nltk.corpus import stopwords
+
+# Download stopwords (run once)
+nltk.download('stopwords')
+
+stop_words = set(stopwords.words('english'))
 
 # ---------- CLEANING FUNCTION ----------
 def clean_text(text):
@@ -15,25 +22,31 @@ def clean_text(text):
     # 2. Remove URLs
     text = re.sub(r'http\S+|www\S+|https\S+', '', text)
 
-    # 3. Remove Emojis
+    # 3. Remove Mentions (@username)
+    text = re.sub(r'@\w+', '', text)
+
+    # 4. Remove Emojis
     text = emoji.replace_emoji(text, replace='')
 
-    # 4. Handle Hashtags (remove # but keep word)
+    # 5. Handle Hashtags (#word → word)
     text = re.sub(r'#', '', text)
 
-    # 5. Remove Punctuation
+    # 6. Remove Punctuation
     text = text.translate(str.maketrans('', '', string.punctuation))
 
-    # 6. Remove Extra Whitespaces
+    # 7. Remove Extra Whitespaces
     text = re.sub(r'\s+', ' ', text).strip()
 
-    return text
+    # 8. Remove Stopwords
+    words = text.split()
+    words = [word for word in words if word not in stop_words]
+
+    return " ".join(words)
 
 # ---------- READ FILE ----------
-# For CSV (change column name if needed)
-df = pd.read_csv("Book1.csv")   # Make sure your file is in same folder
+df = pd.read_csv("Book1.csv")   # change filename if needed
 
-# Apply cleaning on a column (change 'text' to your column name)
+# Apply cleaning
 df['cleaned_text'] = df['text'].apply(clean_text)
 
 # ---------- SAVE OUTPUT ----------
