@@ -44,7 +44,7 @@ def clean_text(text):
     return " ".join(words)
 
 # ---------- READ FILE ----------
-df = pd.read_csv("Book1.csv")   # change filename if needed
+df = pd.read_csv("Dataset/Book1.csv")   # change filename if needed
 
 # Apply cleaning
 df['cleaned_text'] = df['text'].apply(clean_text)

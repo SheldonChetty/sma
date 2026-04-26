@@ -3,15 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load dataset
-df = pd.read_csv("Books2.csv")
+# ---------------- LOAD DATA ---------------- #
+df = pd.read_csv("Superstore.csv", encoding='latin1')   # change filename if needed
 
 print("First 5 rows:\n", df.head())
 
 # ================= EXPLORATORY ANALYSIS =================
-col = df['actual_productivity_score']
+col = df['Sales']
 
-print("\n===== EXPLORATORY ANALYSIS =====")
+print("\n===== EXPLORATORY ANALYSIS (Sales) =====")
 print("1. Mean:", col.mean())
 print("2. Median:", col.median())
 print("3. Mode:", col.mode()[0])
@@ -26,86 +26,84 @@ print("10. Kurtosis:", col.kurt())
 # ================= VISUALIZATION =================
 print("\n===== VISUALIZATION =====")
 
-# 1 Scatter Plot
+# 1 Scatter Plot — Sales vs Profit
 plt.figure()
-plt.scatter(df['daily_social_media_time'], df['actual_productivity_score'])
-plt.xlabel("Daily Social Media Time")
-plt.ylabel("Productivity Score")
-plt.title("Social Media Time vs Productivity")
+plt.scatter(df['Sales'], df['Profit'])
+plt.xlabel("Sales")
+plt.ylabel("Profit")
+plt.title("Sales vs Profit")
 plt.tight_layout()
 plt.show()
 
-# 2 Histogram
+# 2 Histogram — Sales Distribution
 plt.figure()
-plt.hist(df['actual_productivity_score'], bins=5)
-plt.title("Productivity Distribution")
-plt.xlabel("Productivity Score")
+plt.hist(df['Sales'], bins=10)
+plt.title("Sales Distribution")
+plt.xlabel("Sales")
 plt.tight_layout()
 plt.show()
 
-# 3 Pie Chart
+# 3 Pie Chart — Category Distribution
 plt.figure()
-df['social_platform_preference'].value_counts().plot.pie(autopct='%1.1f%%')
-plt.title("Platform Preference")
+df['Category'].value_counts().plot.pie(autopct='%1.1f%%')
+plt.title("Category Distribution")
 plt.ylabel("")
 plt.tight_layout()
 plt.show()
 
-# 4 Line Plot
-sorted_df = df.sort_values(by="work_hours_per_day")
+# 4 Line Plot — Sales over Orders
+sorted_df = df.sort_values(by="Order Date")
 plt.figure()
-plt.plot(sorted_df['work_hours_per_day'], sorted_df['breaks_during_work'])
-plt.xlabel("Work Hours")
-plt.ylabel("Breaks")
-plt.title("Work Hours vs Breaks")
+plt.plot(sorted_df['Sales'])
+plt.xlabel("Order Index")
+plt.ylabel("Sales")
+plt.title("Sales Trend")
 plt.tight_layout()
 plt.show()
 
-# 5 Box Plot
+# 5 Box Plot — Profit by Category
 plt.figure()
-sns.boxplot(x='job_type', y='actual_productivity_score', data=df)
-plt.title("Productivity by Job Type")
+sns.boxplot(x='Category', y='Profit', data=df)
+plt.title("Profit by Category")
 plt.tight_layout()
 plt.show()
 
-# 6 Bar Plot
-df['sleep_group'] = pd.cut(df['sleep_hours'], bins=4)
+# 6 Bar Plot — Sales by Region
 plt.figure()
-df.groupby('sleep_group', observed=True)['coffee_consumption_per_day'].mean().plot(kind='bar')
-plt.xlabel("Sleep Hours Group")
-plt.ylabel("Avg Coffee Consumption")
-plt.title("Sleep vs Coffee")
-plt.xticks(rotation=45)
+df.groupby('Region')['Sales'].sum().plot(kind='bar')
+plt.xlabel("Region")
+plt.ylabel("Total Sales")
+plt.title("Sales by Region")
 plt.tight_layout()
 plt.show()
 
-# 7 Heatmap
+# 7 Heatmap — Correlation
 plt.figure()
 sns.heatmap(df.select_dtypes(include=np.number).corr(), annot=True, cmap="coolwarm")
 plt.title("Correlation Heatmap")
 plt.tight_layout()
 plt.show()
 
-# 8 Area Chart
-sorted_df = df.sort_values(by="stress_level")
+# 8 Area Chart — Sales vs Profit
+sorted_df = df.sort_values(by="Sales")
 plt.figure()
-plt.fill_between(sorted_df['stress_level'], sorted_df['actual_productivity_score'], alpha=0.3)
-plt.xlabel("Stress Level")
-plt.ylabel("Productivity")
-plt.title("Stress vs Productivity")
+plt.fill_between(sorted_df['Sales'], sorted_df['Profit'], alpha=0.3)
+plt.xlabel("Sales")
+plt.ylabel("Profit")
+plt.title("Sales vs Profit Area")
 plt.tight_layout()
 plt.show()
 
-# 9 Violin Plot
+# 9 Violin Plot — Sales Distribution
 plt.figure()
-sns.violinplot(y=df['actual_productivity_score'])
-plt.title("Productivity Distribution")
+sns.violinplot(y=df['Sales'])
+plt.title("Sales Distribution Shape")
 plt.tight_layout()
 plt.show()
 
-# 10 Density Plot
+# 10 Density Plot — Profit Density
 plt.figure()
-sns.kdeplot(df['daily_social_media_time'], fill=True)
-plt.title("Social Media Time Density")
+sns.kdeplot(df['Profit'], fill=True)
+plt.title("Profit Density")
 plt.tight_layout()
 plt.show()

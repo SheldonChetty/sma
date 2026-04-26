@@ -1,0 +1,45 @@
+source,target
+Jon Snow,Samwell Tarly
+Jon Snow,Arya Stark
+Jon Snow,Sansa Stark
+Arya Stark,Sansa Stark
+Tyrion Lannister,Cersei Lannister
+Tyrion Lannister,Jaime Lannister
+Cersei Lannister,Jaime Lannister
+Daenerys Targaryen,Jon Snow
+Daenerys Targaryen,Tyrion Lannister
+Daenerys Targaryen,Missandei
+Missandei,Grey Worm
+Grey Worm,Daenerys Targaryen
+Bran Stark,Arya Stark
+Bran Stark,Sansa Stark
+Bran Stark,Jon Snow
+Theon Greyjoy,Sansa Stark
+Theon Greyjoy,Yara Greyjoy
+Yara Greyjoy,Daenerys Targaryen
+Varys,Tyrion Lannister
+Varys,Daenerys Targaryen
+Littlefinger,Sansa Stark
+Littlefinger,Arya Stark
+Hodor,Bran Stark
+Jorah Mormont,Daenerys Targaryen
+Jorah Mormont,Tyrion Lannister
+Sandor Clegane,Arya Stark
+Gregor Clegane,Cersei Lannister
+Brienne of Tarth,Sansa Stark
+Brienne of Tarth,Jaime Lannister
+Podrick Payne,Brienne of Tarth
+Davos Seaworth,Jon Snow
+Davos Seaworth,Stannis Baratheon
+Stannis Baratheon,Melisandre
+Melisandre,Jon Snow
+Eddison Tollett,Jon Snow
+Gendry,Arya Stark
+Gendry,Jon Snow
+Robb Stark,Catelyn Stark
+Catelyn Stark,Sansa Stark
+Catelyn Stark,Arya Stark
+Ned Stark,Catelyn Stark
+Ned Stark,Jon Snow
+Ned Stark,Sansa Stark
+Ned Stark,Arya Stark
